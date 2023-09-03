@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { App } from 'components/App';
+import { createRoot } from 'react-dom/client';
+import App from 'components/App';
 import './index.css';
+import { API_KEY } from './services/Movies.API';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <App API_KEY={API_KEY} />
   </React.StrictMode>
 );
