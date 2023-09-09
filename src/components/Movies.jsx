@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import { searchMovies } from '../services/Movies.API';
 import {
   MoviesContainer,
   MoviesTitle,
@@ -11,7 +11,6 @@ import {
   MovieList,
   MovieItem,
 } from '../styles/MoviesStyles';
-import { API_KEY } from '../services/Movies.API';
 import Loader from './Loader';
 
 const Movies = ({ keyword }) => {
