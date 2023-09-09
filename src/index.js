@@ -6,6 +6,6 @@ import { API_KEY } from './services/Movies.API';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App API_KEY={API_KEY} />
+    <App/>
   </React.StrictMode>
 );

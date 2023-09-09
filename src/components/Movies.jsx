@@ -23,17 +23,15 @@ const Movies = ({ keyword }) => {
   const handleSearch = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${API_KEY}`
-      );
-      const searchMovies = response.data.results;
-      setMovies(searchMovies);
+      const searchMoviesResult = await searchMovies(query);
+      setMovies(searchMoviesResult);
       setLoading(false);
     } catch (error) {
       console.error('Error searching movies:', error);
       setLoading(false);
     }
   };
+
 
   const handleChange = event => {
     setQuery(event.target.value);

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,11 +9,12 @@ import Navigation from './Navigation';
 import Loader from './Loader';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import Home from './Home';
-import Movies from './Movies';
-import MovieDetails from './MovieDetails';
-import Cast from './Cast';
-import Reviews from './Reviews';
+
+const Home = lazy(() => import('./Home'));
+const Movies = lazy(() => import('./Movies'));
+const MovieDetails = lazy(() => import('./MovieDetails'));
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
 
 const App = () => {
   useEffect(() => {
@@ -29,15 +30,17 @@ const App = () => {
   return (
     <Router>
       <Navigation />
-      <Suspense fallback={<Loader />}></Suspense>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MovieDetails />} />
-        <Route path="/movies/:movieId/cast" element={<Cast />} />
-        <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-        <Route path="/*" element={<Navigate to="/" />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="/movies/:movieId/cast" element={<Cast />} />
+            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          </Route>
+          <Route path="/*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 };
