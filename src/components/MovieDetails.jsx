@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import { getMovieDetails } from '../services/Movies.API';
 import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -15,7 +15,6 @@ import {
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const location = useLocation();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -55,17 +54,15 @@ const MovieDetails = () => {
           <nav>
             <ul>
               <li>
-                <StyledLink to={`${location.pathname}/cast`}>Cast</StyledLink>
+                <StyledLink to={`cast`}>Cast</StyledLink>
               </li>
               <li>
-                <StyledLink to={`${location.pathname}/reviews`}>
-                  Reviews
-                </StyledLink>
+                <StyledLink to={`reviews`}>Reviews</StyledLink>
               </li>
             </ul>
           </nav>
-          <Outlet />
         </MovieDetailsContent>
+        <Outlet />
       </MovieInfo>
     </MovieDetailsContainer>
   );
